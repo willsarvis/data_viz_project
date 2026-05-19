@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rap Across Space and Time</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #111111;
+      color: #cccccc;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── Placeholders ──────────────────────────────────────────────────────── */
+    .placeholder-block {
+      background: #1a1a1a;
+      border: 1px dashed #333333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #555555;
+      font-size: 13px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      padding: 24px;
+    }
+
+    .placeholder-block .label {
+      font-family: 'Anton SC', sans-serif;
+      font-size: 16px;
+      color: #444444;
+      letter-spacing: 0.05em;
+    }
+
+    .placeholder-text {
+      background: #1a1a1a;
+      border: 1px dashed #333333;
+      padding: 20px 28px;
+      color: #555555;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* ── Header ────────────────────────────────────────────────────────────── */
+    header {
+      padding: 80px 28px 56px;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    header h1 {
+      font-family: 'Anton SC', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    header .byline {
+      font-size: 10px;
+      color: #555555;
+      letter-spacing: 0.05em;
+      margin-top: 16px;
+    }
+
+    header .byline span { color: #555555; margin: 0 8px; }
+
+    /* ── Section headings ──────────────────────────────────────────────────── */
+    h2 {
+      font-family: 'Anton SC', sans-serif;
+      font-size: 28px;
+      color: #ffffff;
+      margin: 56px 0 16px;
+    }
+
+    /* ── Body text ─────────────────────────────────────────────────────────── */
+    p { margin-bottom: 20px; }
+
+    /* ── Full-bleed visualization wrapper ─────────────────────────────────── */
+    .viz-block {
+      width: 100%;
+      margin: 48px 0;
+    }
+
+    .viz-block iframe {
+      display: block;
+      width: 100%;
+      height: 85vh;
+      border: none;
+      background: #111111;
+    }
+
+    .viz-caption {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 14px 28px 0;
+      font-size: 13px;
+      color: #888888;
+    }
+
+    /* ── Divider ───────────────────────────────────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid #2a2a2a;
+      margin: 56px 0;
+    }
+
+    /* ── References ────────────────────────────────────────────────────────── */
+    .references-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .references-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #1e1e1e;
+      font-size: 14px;
+      color: #888888;
+    }
+
+    /* ── Spotlight cards ───────────────────────────────────────────────────── */
+    .spotlight-outer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .spotlight-card-v2 {
+      display: flex;
+      gap: 20px;
+      align-items: stretch;
+      height: 300px;
+      margin: 72px 0;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 0 12px rgba(255,255,255,0.12),
+                  0 0 32px rgba(255,255,255,0.07),
+                  0 0 60px rgba(255,255,255,0.04);
+    }
+
+    .spotlight-photo-card {
+      width: 185px;
+      min-width: 185px;
+      flex-shrink: 0;
+      border: 2px solid #993d00;
+      border-radius: 10px;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    .spotlight-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: drop-shadow(0 0 3px #993d00) drop-shadow(0 0 7px rgba(153,61,0,0.55));
+    }
+
+    .spotlight-text-card {
+      flex: 1;
+      min-width: 0;
+      border: 2px solid #993d00;
+      border-radius: 10px;
+      background: #1a1a1a;
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #cccccc;
+      line-height: 1.75;
+      overflow-y: auto;
+    }
+
+    .spotlight-text-card .rapper-name {
+      font-family: 'Anton SC', sans-serif;
+      font-size: 32px;
+      font-style: italic;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Header subtitle ───────────────────────────────────────────────────── */
+    header .subtitle {
+      font-size: 15px;
+      color: #888888;
+      max-width: 580px;
+      margin: 0 auto 4px;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ────────────────────────────────────────────────────────────── */
+    footer {
+      margin-top: 96px;
+      padding: 40px 28px;
+      border-top: 1px solid #2a2a2a;
+      text-align: center;
+      font-size: 12px;
+      color: #555555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header>
+    <h1>Rap Across Space and Time</h1>
+    <p class="subtitle">Tracking the Rise and Fall of Rap Music: Billboard Top 40 Data Analysis</p>
+    <p class="byline">
+      Will Sarvis
+      <span>|</span>
+      May 18, 2026
+      <span>|</span>
+      INFO 7502
+      <span>|</span>
+      Professor Jessica Russo
+    </p>
+  </header>
+
+  <main>
+
+    <!-- ── Text section 1 ────────────────────────────────────────────────── -->
+    <div class="container" style="padding-top: 52px;">
+      <p>Rap music has been divisive and attractive ever since its inception in the late 1970s in the South Bronx. Rap music spent many years out of the fateful gaze of mainstream audiences, flourishing in the streets of New York and slowly spreading to other American cities. It wasn't until February 1990 that rap music claimed a spot on the Billboard Hot 100's Top 40 list. By then rap had spread far beyond its crowded birthplace to Los Angeles, San Francisco, Miami, Detroit, Chicago, and Atlanta. As rap music spread across the country (and world) rap music took on uniquely regional characteristics— producing radically distinct sounds in different cities. After landing on Billboard's Top 40, rap music would stay there for another 35 years. In 2004 and 2018 rap music led Billboard's Top 40. Yet in 2025 in curious reversal, rap music stepped down from its place on the Top 40.</p>
+    </div>
+
+    <!-- ── Visualization 1: Rap Map ──────────────────────────────────────── -->
+    <div class="viz-block">
+      <iframe
+        src="../rap_map.html"
+        title="Visualization 1"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- ── Spotlight 1: Biggie Smalls ───────────────────────────────────────── -->
+    <div class="spotlight-outer">
+      <div class="spotlight-card-v2">
+        <div class="spotlight-photo-card">
+          <img src="pngaaa.com-3795968.png" alt="Biggie Smalls">
+        </div>
+        <div class="spotlight-text-card">
+          <span class="rapper-name">BIGGIE SMALLS</span>
+          <p>In 1995, as rap music was skyrocketing into the mainstream, New York City still loomed large. That year Brooklyn's Christopher Wallace, known as Notorious B.I.G. or Biggie Smalls, towered at the top of rap charts and was awarded Billboard's 'Rap Artist of the Year' and 'Rap Song of the Year'. Coming off of a wildly successful debut album <em>Ready to Die</em> (1994), his songs 'Big Poppa/Warning' and 'One More Chance/Stay With Me' stayed on Billboard's Top 40 for 24 weeks and 20 weeks respectively, with 'One More Chance/Stay With Me' claiming the #2 spot at a time where rap music occupied 15% of Billboard's charts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Visualization 2: Genre Chart ────────────────────────────────────── -->
+    <div class="viz-block">
+      <div style="width: 75%; margin: 0 auto;">
+        <iframe
+          src="../genre_chart.html"
+          title="Visualization 2"
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- ── Spotlight 2: Chief Keef ──────────────────────────────────────────── -->
+    <div class="spotlight-outer">
+      <div class="spotlight-card-v2">
+        <div class="spotlight-photo-card">
+          <img src="159-1590980_chief-keef-chief-keef-transparent.png" alt="Chief Keef">
+        </div>
+        <div class="spotlight-text-card">
+          <span class="rapper-name">CHIEF KEEF</span>
+          <p>In 2004 rap music dominated Billboard's charts for the first time— by the 2010s rap music had seemingly become a permanent staple for mainstream audiences. Rap music had become massively popular among affluent suburban teenagers with rap concerts holding up an inverted mirror to the neighborhoods that many prominent rappers were raised in. Raised on Chicago's South Side, Chief Keef came onto the rap scene at age 16, inaugurating an abrasive new style of rap that would come to be known as drill music. Filming low production videos while under house arrest in 2011 Chief Keef became a sensation in Chicago before taking the nation by storm and drawing attention from the likes of Kanye West (and Lou Reed). Chief Keef's drill, however, did not deter affluent suburban audiences, if anything, perhaps the opposite.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Visualization 3: Genre Pie Charts ───────────────────────────────── -->
+    <div class="viz-block">
+      <iframe
+        src="../genre_pie.html"
+        title="Visualization 3"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- ── Text section 4 ────────────────────────────────────────────────── -->
+    <div class="container">
+      <p>In 2025, after enjoying 35 years in the lime light, rap music suddenly dropped off Billboard's Top 40. While this trend may turn within a year or two, this represents an interesting turn in the history of rap music and popular music at large. After a surge in 2018, rap music fell precipitously reaching a 35 year low in 2025. In 2023 folk music skyrocketed to lead the Billboard's chart for the first time in this same period. While this transition could certainly be viewed through the prism of today's social and political upheaval, it may not be the death knell of rap music at all. In fact, it may amount to a return to the space that rap music occupied before its historic Billboard run began in 1990—which laid the foundation for what made rap music so attractive to mass audiences.</p>
+    </div>
+
+    <hr>
+
+    <!-- ── References ────────────────────────────────────────────────────── -->
+    <div class="container">
+      <h2>Note on Data</h2>
+      <p style="font-size:14px; color:#888888; line-height:1.75;">Data comes directly from Billboard.com. Genre classification and metadata come from MusicBrainz (python-musicbrainz3), Last.fm (pylast), and Wikipedia (Wikipedia-API) and Wiki's SPARQL.</p>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer>
+    Will Sarvis &mdash; INFO 7502 &mdash; Professor Jessica Russo &mdash; May 2026
+  </footer>
+
+</body>
+</html>
